@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import Dashboard from './Dashboard';
+import Sidebar from './Sidebar';
+import Topbar from './Topbar';
+import Products from "./Products";
+import Users from './Users';
+import Form from './Form';
+import ProductForm from './ProductForm';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  return(
+    <BrowserRouter>
+    <div id="wrapper">
+      <Sidebar/>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <Topbar/>
+          <div class="container-fluid">
+            
+          <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/form" element={<Form />} />
+                <Route path="/create-product" element={<ProductForm />} />
+              </Routes>
+            
+          </div>
 
+        </div>
+        </div>
+
+
+    </div>
+    </BrowserRouter>
+  )
+}
 export default App;
