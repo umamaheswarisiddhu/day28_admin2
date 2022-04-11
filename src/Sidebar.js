@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import undraw_rocket from "./img/undraw_rocket.svg";
+import UserContext from "./UserContext";
 
 function Sidebar() {
-  //side bar component
+  const userContext = useContext(UserContext);
   return (
     <ul
-    className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+      className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
       id="accordionSidebar"
     >
       <a
@@ -18,6 +19,7 @@ function Sidebar() {
         </div>
         <div className="sidebar-brand-text mx-3">
           SB Admin <sup>2</sup>
+          {userContext.userName}
         </div>
       </a>
 
@@ -35,7 +37,6 @@ function Sidebar() {
       <div className="sidebar-heading">Addons</div>
 
       <li className="nav-item">
-        {/* creating url param for user component */}
         <Link className="nav-link" to={"/users"}>
           <i className="fas fa-fw fa-chart-area"></i>
           <span>Users</span>
@@ -43,10 +44,9 @@ function Sidebar() {
       </li>
 
       <li className="nav-item">
-      {/* creating url param for product component */}
-        <Link className="nav-link" to={"/products"}>
+        <Link className="nav-link" to={"/profile"}>
           <i className="fas fa-fw fa-table"></i>
-          <span>Products</span>
+          <span>Profile</span>
         </Link>
       </li>
 

@@ -1,21 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
-function Users() {
+function Profile() {
   const [user, setUsers] = useState([]);
+  // useEffect for getting data from API
   useEffect(() => {
     async function fetchData() {
-      let users = await axios.get(
+      let user = await axios.get(
         "https://6242aa41b6734894c1540621.mockapi.io/employee"
       );
-      setUsers(users.data);
+      setUsers(user.data);
     }
     fetchData();
   }, []);
 
+  // fuction for delete data from table
   const deleteUser = (id) => {
+    //prompt message for delete data
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -50,12 +53,12 @@ function Users() {
   return (
     <>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">User List</h1>
+        <h1 className="h3 mb-0 text-gray-800">Profile List</h1>
         <Link
           className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-          to={"/create-user"}
+          to={"/create-profile"}
         >
-          <i className="fa-sm text-white-50"></i> Create User
+          <i className="fa-sm text-white-50"></i> Create Profile
         </Link>
       </div>
       <h1 className="h3 mb-2 text-gray-800">Tables</h1>
@@ -107,9 +110,9 @@ function Users() {
                 </tr>
               </tfoot>
               <tbody>
-                {user.map((e, index) => {
+                {user.map((e, id) => {
                   return (
-                    <tr key={index}>
+                    <tr key={id}>
                       <td>{e.id}</td>
                       <td>{e.name}</td>
                       <td>{e.age}</td>
@@ -119,19 +122,20 @@ function Users() {
                       <td>{e.salary}</td>
                       <td className="text-center ">
                         <Link
-                          to={`/user-view/${e.id}`}
+                          to={`/profile-view/${e.id}`}
                           type="button"
-                          className="btn btn-primary"
+                          class="btn btn-primary"
                         >
                           View
                         </Link>
 
                         <Link
-                          to={`/user-edit/${e.id}`}
+                          to={`/profile-edit/${e.id}`}
                           className="btn btn-success m-1"
                         >
                           Edit
                         </Link>
+
                         <button
                           onClick={() => deleteUser(e.id)}
                           className="btn btn-danger"
@@ -151,4 +155,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Profile;
